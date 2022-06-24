@@ -3,16 +3,20 @@ const url = 'https://jsonplaceholder.typicode.com/posts'
 function getPost() {
   fetch(url)
     .then(res => res.json())
-    .then(data => data)
+    .then(data => render(data))
 }
 getPost()
 
 
 const list = document.querySelector('.list')
 
-const render = async (info) => {
-  const infomarion = await info()
-  console.log(infomarion);
+const render = (data) => {
+  console.log(data);
+  data.map((item, i) => {
+    return (
+      list.innerHTML += `
+        <div>${item.title}</div>
+      `
+    )
+  })
 }
-
-render(getPost)
